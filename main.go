@@ -52,7 +52,7 @@ func CheckMi3() {
 
 	html := string(body)
 
-	if strings.Contains(html, "Out of Stock") {
+	if !strings.Contains(html, "Out of Stock") {
 		SendMail("mi3 available.")
 	}
 }
@@ -111,7 +111,7 @@ func CheckIPhone6(productUrl string) {
 
 	checkIPhoneResponse := ParseCheckIPhone6JsonResp(body)
 
-	if strings.Contains(checkIPhoneResponse.Body.Content.Selected.PurchaseOptions.ShippingLead, "Currently unavailable") {
+	if !strings.Contains(checkIPhoneResponse.Body.Content.Selected.PurchaseOptions.ShippingLead, "Currently unavailable") {
 		message := fmt.Sprintf("\n %v \n %v", checkIPhoneResponse.Body.Content.Selected.ProductTitle, checkIPhoneResponse.Body.Content.Selected.PurchaseOptions.ShippingLead)
 		SendMail(message)
 	}
